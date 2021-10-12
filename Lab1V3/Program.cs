@@ -155,7 +155,7 @@ public class V3DataArray: V3Data
 
     public override int Count { get { return InfoVec.Length; } }
 
-    public override double MaxDistance
+   public override double MaxDistance
     { 
         get
         {
@@ -170,12 +170,10 @@ public class V3DataArray: V3Data
                         {
                             x2 = i2*Xstep;
                             y2 = j2*Ystep;    
-                            if(x1!=x2 | y1!=y2)
-                            {
-                                Dis = Sqrt(Pow((x2-x1), 2) + Pow((y2-y1), 2));
-                                if(Dis > MaxDis)
-                                    MaxDis = Dis;
-                            }
+                            
+                            Dis = Sqrt(Pow((x2-x1), 2) + Pow((y2-y1), 2));
+                            if(Dis > MaxDis)
+                                MaxDis = Dis;
                         }
                 }
             return MaxDis;
