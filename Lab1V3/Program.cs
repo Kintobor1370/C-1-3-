@@ -287,16 +287,18 @@ class Test
         V3DataList Lst1 = Ar1;
         V3DataList Lst2 = Ar2;
 
+        string format = "{0:F4}";
+
 //.....1)
-        Console.WriteLine(Ar1.ToLongString("{0:c}"));
+        Console.WriteLine(Ar1.ToLongString(format));
         Console.WriteLine("List representation:");
-        Console.WriteLine(Lst1.ToLongString("{0:c}"));
+        Console.WriteLine(Lst1.ToLongString(format));
 
 //.....2)
         V3MainCollection Collection = new V3MainCollection();
         Collection.Add(Ar1); Collection.Add(Ar2);
         Collection.Add(Lst1); Collection.Add(Lst2);
-        Console.WriteLine(Collection.ToLongString("{0:c}"));
+        Console.WriteLine(Collection.ToLongString(format));
 
 //.....3)
         for(int index=0; index<Collection.Count; index++)
