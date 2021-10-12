@@ -109,11 +109,13 @@ public class V3DataList: V3Data
     {
         string info = null;
         int n = 1;
-//        Vector2 abs;
+        Vector2 abs;
         foreach(DataItem Item in DataList)
         {
+            abs = Vector2.Abs(Item.VecVal);
             info += Convert.ToString(n) + ")  X=" + String.Format(format, Item.X) +"   Y=" + 
-            String.Format(format, Item.Y) + "   Vector Value: " + String.Format(format, Item.VecVal) + "\n";
+            String.Format(format, Item.Y) + "   Vector Value: " + String.Format(format, Item.VecVal) + "   Vector Module: " + 
+            String.Format(format, abs) +"\n";
             n++;
         }
         return ToString() + "List Info:\n" + info;
@@ -186,12 +188,15 @@ public class V3DataArray: V3Data
     public override string ToLongString(string format)
     {
         string str = this.ToString() + "\nNodes info:\n";
+        Vector2 abs;
         int n = 1;
         for(int i=0; i<Xnum; i++)
             for(int j=0; j<Ynum; j++)
             {
+                abs = Vector2.Abs(InfoVec[i, j]);
                 str += Convert.ToString(n) + ".  X=" + String.Format(format, i*Xstep) + 
-                "   Y=" + String.Format(format, i*Ystep) + "  Vector Value: " + String.Format(format, InfoVec[i, j]) + "\n";
+                "   Y=" + String.Format(format, i*Ystep) + "  Vector Value: " + String.Format(format, InfoVec[i, j]) + 
+                "   Vector Module: " + String.Format(format, abs) + "\n";
                 n++;
             }
         return str;
@@ -262,7 +267,7 @@ public class V3MainCollection
     }  
 }
 
-//..................КЛАСС МЕТОДОВ ВЫЧИСЛЕНИЯ ВЕКТОРА ПОЛЯ (в=использую вместо вычислений простейшние операции)
+//..................КЛАСС МЕТОДОВ ВЫЧИСЛЕНИЯ ВЕКТОРА ПОЛЯ (использую вместо вычислений простейшние операции)
 public static class VecCalculator
 {
     public static Vector2 Sum(double x, double y)
@@ -288,7 +293,7 @@ class Test
         V3DataList Lst1 = Ar1;
         V3DataList Lst2 = Ar2;
 
-        string format = "{0:F4}";
+        string format = "{0:F3}";
 
 //.....1)
         Console.WriteLine(Ar1.ToLongString(format));
