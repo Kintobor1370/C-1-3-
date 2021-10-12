@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using static System.Math;
@@ -109,10 +109,11 @@ public class V3DataList: V3Data
     {
         string info = null;
         int n = 1;
+//        Vector2 abs;
         foreach(DataItem Item in DataList)
         {
             info += Convert.ToString(n) + ")  X=" + String.Format(format, Item.X) +"   Y=" + 
-           String.Format(format, Item.Y) + "   Vector Value: " + Convert.ToString(Item.VecVal) + "\n";
+            String.Format(format, Item.Y) + "   Vector Value: " + String.Format(format, Item.VecVal) + "\n";
             n++;
         }
         return ToString() + "List Info:\n" + info;
@@ -190,7 +191,7 @@ public class V3DataArray: V3Data
             for(int j=0; j<Ynum; j++)
             {
                 str += Convert.ToString(n) + ".  X=" + String.Format(format, i*Xstep) + 
-                "   Y=" + String.Format(format, i*Ystep) + "  Vector Value: " + Convert.ToString(InfoVec[i,j]) + "\n";
+                "   Y=" + String.Format(format, i*Ystep) + "  Vector Value: " + String.Format(format, InfoVec[i, j]) + "\n";
                 n++;
             }
         return str;
