@@ -272,12 +272,6 @@ public static class VecCalculator
 
     public static Vector2 Com(double x, double y)
     { return new Vector2((float)(x*y)); }
-
-    public static Vector2 Frac(double x, double y)
-    { return new Vector2((float)(x/y)); }
-
-    public static Vector2 Pow(double x, double y)
-    { return Pow(x, y); }
 }
 
 class Test
