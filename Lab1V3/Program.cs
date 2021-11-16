@@ -155,7 +155,7 @@ public class V3DataArray: V3Data
 
     public override int Count { get { return InfoVec.Length; } }
 
-   public override double MaxDistance
+    public override double MaxDistance
     { 
         get
         {
@@ -191,9 +191,9 @@ public class V3DataArray: V3Data
         for(int i=0; i<Xnum; i++)
             for(int j=0; j<Ynum; j++)
             {
-                abs = Vector2.Abs(InfoVec[i, j]);
+                abs = Vector2.Abs(InfoVec[i,j]);
                 str += Convert.ToString(n) + ".  X=" + String.Format(format, i*Xstep) + 
-                "   Y=" + String.Format(format, i*Ystep) + "  Vector Value: " + String.Format(format, InfoVec[i, j]) + 
+                "   Y=" + String.Format(format, j*Ystep) + "  Vector Value: " + String.Format(format, InfoVec[i, j]) + 
                 "   Vector Module: " + String.Format(format, abs) + "\n";
                 n++;
             }
@@ -250,10 +250,10 @@ public class V3MainCollection
 
     public string ToLongString(string format)
     {
-        string str = "\n...............COLLECTION ITEMS:\n";
+        string str = "\n__________________________________COLLECTION ITEMS:__________________________________\n";
         foreach(V3Data Item in DataList)
             str += Item.ToLongString(format) + "\n";
-        return str + "...............END OF COLLECTION.\n";
+        return str + "__________________________________END OF COLLECTION.__________________________________\n";
     }
 
     public override string ToString()
@@ -268,26 +268,32 @@ public class V3MainCollection
 //..................КЛАСС МЕТОДОВ ВЫЧИСЛЕНИЯ ВЕКТОРА ПОЛЯ (использую вместо вычислений простейшние операции)
 public static class VecCalculator
 {
-    public static Vector2 Sum(double x, double y)
-    { return new Vector2((float)(x+y)); }
+    public static Vector2 var1(double x, double y)
+    { return new Vector2((float)(x+y), (float)(x-y)); }
 
-    public static Vector2 Sub(double x, double y)
-    { return new Vector2((float)(x-y)); }
+    public static Vector2 var2(double x, double y)
+    { return new Vector2((float)(x*y), (float)(x+y)); }
 
-    public static Vector2 Com(double x, double y)
-    { return new Vector2((float)(x*y)); }
+    public static Vector2 var3(double x, double y)
+    { return new Vector2((float)(x*y), (float)(x-y)); }
 }
 
 class Test
 {
     static void Main()
     {
-        FdblVector2 V = new FdblVector2(VecCalculator.Sum);
-        DateTime date1 = new DateTime(2021, 10, 11, 14, 55, 59);
-        DateTime date2 = new DateTime(2021, 10, 12, 12, 30, 31);
+        DateTime date = new DateTime(2021, 10, 11, 14, 55, 59);
         
-        V3DataArray Ar1 = new V3DataArray("Entry #1", date1, 5, 5, 3, 2, V);
-        V3DataArray Ar2 = new V3DataArray("Entry #2", date2, 5, 5, 3, 2, V);
+        int x_num1 = 5;     int y_num1 = 5;
+        double x_step1 = 3;     double y_step1 = 2;
+        int x_num2 = 5;     int y_num2 = 5;
+        double x_step2 = 3;     double y_step2 = 2;
+       
+        FdblVector2 V1 = new FdblVector2(VecCalculator.var1);
+        FdblVector2 V2 = new FdblVector2(VecCalculator.var2);
+
+        V3DataArray Ar1 = new V3DataArray("Entry #1", DateTime.Now, x_num1, y_num1, x_step1, y_step1, V1);
+        V3DataArray Ar2 = new V3DataArray("Entry #2", date, x_num2, y_num2, x_step2, y_step2, V2);
         V3DataList Lst1 = Ar1;
         V3DataList Lst2 = Ar2;
 
